@@ -39,8 +39,8 @@ public class Navigation {
         driver.quit();
     }
 
-    @Then("^i Verify error messages as follows$")
-    public void iVerifyErrorMessagesAsFollows(DataTable dataTable) {
+    @Then("^I Verify error messages as follows$")
+    public void IVerifyErrorMessagesAsFollows(DataTable dataTable) {
         WebDriverManager.chromedriver().setup();
         driver.get("https://jupiter.cloud.planittesting.com");
         driver.findElement(By.xpath("//*[@id=\"nav-contact\"]/a")).click();
