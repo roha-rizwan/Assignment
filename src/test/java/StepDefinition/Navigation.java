@@ -8,6 +8,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.Pages.CommonPages.NavigationPage.ContactPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,16 +25,21 @@ public class Navigation {
 
     @Given("^I am on the \"([^\"]*)\" page$")
     public void iAmOnThePage(String contactPage) throws Throwable {
-        WebDriverManager.chromedriver().setup();
-        driver.get("https://jupiter.cloud.planittesting.com");
-        if (contactPage.equals("Contact")) {
+        if (contactPage.equals("Home")) {
+            WebDriverManager.chromedriver().setup();
+            driver.get("https://jupiter.cloud.planittesting.com");
+        }
+
+        else if (contactPage.equals("Contact")) {
             driver.findElement(By.xpath("//*[@id=\"nav-contact\"]/a")).click();
         }
-        if (contactPage.equals("Shop")) {
+        else if (contactPage.equals("Shop")) {
             driver.findElement(By.xpath("//*[@id=\"nav-shop\"]/a")).click();
         }
-        if (contactPage.equals("Cart")) {
+        else if (contactPage.equals("Cart")) {
+            Thread.sleep(2000);
             driver.findElement(By.xpath("//*[@id=\"nav-cart\"]/a")).click();
+
         }
 
         // driver.quit();
@@ -115,9 +121,33 @@ public class Navigation {
         }
     }
 
-    @Then("^I Veriy the shopping$")
-    public void iVeriyTheShopping(DataTable dataTable) {
+    @Then("^I Verify the shopping$")
+    public void iVerifyTheShopping(DataTable dataTable) throws InterruptedException {
+Thread.sleep(2000);
+        int rows = driver.findElements(By.xpath("//tbody//tr")).size();
+
         List<Map<String, String>> buyThings = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> thing : buyThings) {
+
+for(int i =1 ; i<=rows; i++)
+{
+
+        WebElement itemcell = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[1]"));
+        if (itemcell.getText().equals(thing.get("Item")))
+        {
+            WebElement priceCEll = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[2]"));
+            WebElement quantityCEll = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[3]"));
+            WebElement subtotalCell = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[4]"));
+
+            Assert.assertEquals(priceCEll.getText(), thing.get("Price"));
+            Assert.assertEquals(quantityCEll.getText(), thing.get("Quantity"));
+            Assert.assertEquals(subtotalCell.getText(), thing.get("SubTotal"));
+
+        }
+
+
+}
 
     }
+}
 }

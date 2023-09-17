@@ -18,16 +18,17 @@ Feature: Contact And Shop
     And I close the page
 
   Scenario: Verify the total
-    Given I am on the "Shop" page
+    Given I am on the "Home" page
+    And  I am on the "Shop" page
     And I buy following items
     |Item|Count|
     |Stuffed Frog|2|
     | Fluffy|5     |
    And I am on the "Cart" page
-    Then I Veriy the shopping
-    |Item|Price|SubTotal|
-    |Stuffed Frog|$10.99|$21.98|
-    |Fluffy Bunny|$9.99|49.95|
+    Then I Verify the shopping
+    |Item|Price|Quantity|SubTotal|
+    |Stuffed Frog|$10.99|2|$21.98|
+    |Fluffy Bunny|$9.99| 5|49.95|
 
 
 
