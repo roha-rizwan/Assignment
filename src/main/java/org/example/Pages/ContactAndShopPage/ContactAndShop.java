@@ -1,5 +1,4 @@
-package org.example.Pages.CommonPages.NavigationPage;
-import org.openqa.selenium.By;
+package org.example.Pages.ContactAndShopPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -95,11 +94,9 @@ public class ContactAndShop {
 
         String headerMessage= "We welcome your feedback - tell it how it is.";
         String blueMessage= headerError.getAttribute("textContent").trim();
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
             if (headerMessage.equals(blueMessage)) {
-
                 if ((wait.until(ExpectedConditions.invisibilityOf(foremanError))) &&
                         (wait.until(ExpectedConditions.invisibilityOf(messageError))) &&
                         (wait.until(ExpectedConditions.invisibilityOf(emailError)))) {
@@ -107,7 +104,7 @@ public class ContactAndShop {
                 }
             }
             } catch (NoSuchElementException ignored) {
-
+            //Do nothing
             }
          return false;
     }

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 public class ContactAndShop {
     public WebDriver driver = new ChromeDriver();
-    org.example.Pages.CommonPages.NavigationPage.ContactAndShop contactAndShop = new org.example.Pages.CommonPages.NavigationPage.ContactAndShop(driver);
+    org.example.Pages.ContactAndShopPage.ContactAndShop contactAndShop = new org.example.Pages.ContactAndShopPage.ContactAndShop(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     @Given("^I am on the \"([^\"]*)\" page$")
     public void iAmOnThePage(String contactPage) throws Throwable {
