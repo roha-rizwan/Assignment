@@ -128,7 +128,7 @@ public class ContactAndShopPage {
         return total.equals(overAllTotal);
     }
     public boolean verifyMessage(String message)  {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(okButton));
         String result = successfulMessage.getAttribute("textContent").trim();
         return message.equals(result);
