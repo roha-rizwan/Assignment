@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Map;
 
-public class ContactAndShop {
+public class ContactAndShopPage {
     WebDriver driver;
     @FindBy(xpath = "//a[contains(text(),'Submit')]")
     WebElement submitFormButton;
@@ -40,7 +40,7 @@ public class ContactAndShop {
     @FindBy(xpath = "//div[2]/div/a")
     WebElement okButton;
 
-    public ContactAndShop(WebDriver driver) {
+    public ContactAndShopPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
 

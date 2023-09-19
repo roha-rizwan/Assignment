@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.example.Pages.ContactAndShopPage.ContactAndShopPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 public class ContactAndShop {
     public WebDriver driver = new ChromeDriver();
-    org.example.Pages.ContactAndShopPage.ContactAndShop contactAndShop = new org.example.Pages.ContactAndShopPage.ContactAndShop(driver);
+    ContactAndShopPage contactAndShop = new ContactAndShopPage(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     @Given("^I am on the \"([^\"]*)\" page$")
     public void iAmOnThePage(String contactPage) throws Throwable {
@@ -67,8 +68,8 @@ public class ContactAndShop {
     @Then("^I verify error messages are gone$")
     public void iVerifyErrorMessagesAreGone() throws InterruptedException {
         Thread.sleep(2000);
-        Boolean errormessageNotexist = contactAndShop.errorMessageNotExsist();
-        Assert.assertTrue("Expected error message is existing", errormessageNotexist);
+        Boolean errorMessageNotExist = contactAndShop.errorMessageNotExsist();
+        Assert.assertTrue("Expected error message is existing", errorMessageNotExist);
     }
 
     @And("^I buy following items$")
@@ -103,8 +104,8 @@ public class ContactAndShop {
         for (Map<String, String> thing : buyThings) {
         for(int i =1 ; i<=rows; i++)
         {
-          WebElement itemcell = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[1]"));
-          if (itemcell.getText().equals(thing.get("Item")))
+          WebElement itemCell = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[1]"));
+          if (itemCell.getText().equals(thing.get("Item")))
           {
             WebElement priceCEll = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[2]"));
             WebElement quantityCEll = driver.findElement(By.xpath("//tbody/tr["+i+"]/td[3]/input"));
