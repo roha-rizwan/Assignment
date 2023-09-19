@@ -16,9 +16,9 @@ pipeline {
                 echo 'Run the security check against the application' 
             }
         }
-        stage('Run Unit Tests') {
+        stage('Test') {
             steps {
-                echo 'Run unit tests from the source code' 
+                bat '.\mnvw test'
             }
         }
         stage('Run Integration Tests') {
