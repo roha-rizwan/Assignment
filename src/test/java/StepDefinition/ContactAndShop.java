@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 public class ContactAndShop {
     public WebDriver driver = new ChromeDriver();
-    ContactAndShopPage contactAndShop = new ContactAndShopPage(driver);
+    ContactAndShopPage contactAndShopPage = new ContactAndShopPage(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     @Given("^I am on the \"([^\"]*)\" page$")
     public void iAmOnThePage(String contactPage) throws Throwable {
@@ -41,7 +41,7 @@ public class ContactAndShop {
 
     @When("^I submit the form$")
     public void iSubmitTheForm() {
-        contactAndShop.submitForm();
+        contactAndShopPage.submitForm();
     }
     @And("^I close the page$")
     public void iCloseThePage() {
@@ -51,7 +51,7 @@ public class ContactAndShop {
     public void IVerifyErrorMessagesAsFollows(DataTable dataTable) {
         List<Map<String, String>> errorMessagesTable = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> form : errorMessagesTable) {
-            boolean isErrorMessageExist = contactAndShop.verifyErrorMessage(form);
+            boolean isErrorMessageExist = contactAndShopPage.verifyErrorMessage(form);
             Assert.assertTrue("Expected error message does not exist", isErrorMessageExist);
         }
     }
@@ -59,16 +59,16 @@ public class ContactAndShop {
     public void iEnterMandatoryFieldsAsFollows(DataTable dataTable) {
        List<Map<String, String>> enterData = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> contactDetails : enterData) {
-            contactAndShop.enterForename(contactDetails.get("Data"), contactDetails.get("Field"));
-            contactAndShop.enterEmail(contactDetails.get("Data"), contactDetails.get("Field"));
-            contactAndShop.enterMessage(contactDetails.get("Data"), contactDetails.get("Field"));
+            contactAndShopPage.enterForename(contactDetails.get("Data"), contactDetails.get("Field"));
+            contactAndShopPage.enterEmail(contactDetails.get("Data"), contactDetails.get("Field"));
+            contactAndShopPage.enterMessage(contactDetails.get("Data"), contactDetails.get("Field"));
            }
     }
 
     @Then("^I verify error messages are gone$")
     public void iVerifyErrorMessagesAreGone() throws InterruptedException {
         Thread.sleep(2000);
-        Boolean errorMessageNotExist = contactAndShop.errorMessageNotExsist();
+        Boolean errorMessageNotExist = contactAndShopPage.errorMessageNotExsist();
         Assert.assertTrue("Expected error message is existing", errorMessageNotExist);
     }
 
@@ -80,17 +80,16 @@ public class ContactAndShop {
         String item =thing.get("Item");
         for(int i=0;i<count;i++)
         {
-            if(item.equals("Stuffed Frog"))
-            {
-                contactAndShop.buyStuffedFrog();
-            }
-            else if (item.equals("Fluffy Bear"))
-            {
-                contactAndShop.buyFluffyBunny();
-            }
-            else if (item.equals("Valentine Bear"))
-            {
-                contactAndShop.buyValentineBear();
+            switch (item) {
+                case "Stuffed Frog":
+                    contactAndShopPage.buyStuffedFrog();
+                    break;
+                case "Fluffy Bear":
+                    contactAndShopPage.buyFluffyBunny();
+                    break;
+                case "Valentine Bear":
+                    contactAndShopPage.buyValentineBear();
+                    break;
             }
         }
 
@@ -119,12 +118,12 @@ public class ContactAndShop {
 }
 @And("^I verify the total \"([^\"]*)\"$")
     public void iVerifyTheTotal(String total) {
-        boolean checkActualTotal = contactAndShop.checkTotal(total);
+        boolean checkActualTotal = contactAndShopPage.checkTotal(total);
         Assert.assertTrue("Total is wrong",checkActualTotal);
     }
     @Then("^I Verify the successful message as \"([^\"]*)\"$")
     public void iVerifyTheSuccessfulMessageAs(String message)  {
-        boolean result = contactAndShop.verifyMessage(message);
+        boolean result = contactAndShopPage.verifyMessage(message);
         Assert.assertTrue("Message is wrong",result);
     }
 }
