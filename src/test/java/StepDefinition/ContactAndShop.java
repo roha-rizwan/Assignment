@@ -1,5 +1,6 @@
 package StepDefinition;
 import cucumber.api.DataTable;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -11,16 +12,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 public class ContactAndShop {
     public WebDriver driver = new ChromeDriver();
     ContactAndShopPage contactAndShopPage = new ContactAndShopPage(driver);
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     @Given("^I am on the \"([^\"]*)\" page$")
-    public void iAmOnThePage(String contactPage) throws Throwable {
+    public void iAmOnThePage(String contactPage) {
         switch (contactPage) {
             case "Home":
                 WebDriverManager.chromedriver().setup();
@@ -43,7 +41,8 @@ public class ContactAndShop {
     public void iSubmitTheForm() {
         contactAndShopPage.submitForm();
     }
-    @And("^I close the page$")
+
+    @After
     public void iCloseThePage() {
         driver.quit();
     }

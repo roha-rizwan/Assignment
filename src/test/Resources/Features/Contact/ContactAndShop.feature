@@ -16,7 +16,6 @@ Feature: Contact And Shop
       |Email    |roharizwan7@gmail.com|
       |Message  |Hello                |
    Then I verify error messages are gone
-   And I close the page
 
 Scenario: Verify that contact is submitted successfully
    Given I am on the "Home" page
@@ -28,7 +27,6 @@ Scenario: Verify that contact is submitted successfully
       |Message  |Hello                |
    And I submit the form
    Then I Verify the successful message as "Thanks Roha, we appreciate your feedback."
-   And I close the page
 
 Scenario: Verify the total
    Given I am on the "Home" page
@@ -45,6 +43,5 @@ Scenario: Verify the total
    |Fluffy Bunny  |$9.99 |5       |$49.95|
    |Valentine Bear|$14.99|3       |$44.97|
    And I verify the total "Total: 116.9"
-   And I close the page
 
 
