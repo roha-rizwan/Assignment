@@ -51,21 +51,18 @@ public class ContactAndShopPage {
          }
     public boolean verifyErrorMessage(Map<String, String> form) {
         String Field = form.get("Field");
+        String expectedMessage = form.get("ErrorMessage");
         switch (Field) {
             case "Forename":
-                String expectedForenameErrorMessage = form.get("ErrorMessage");
-                return expectedForenameErrorMessage.equals(foremanError.getText());
+                return expectedMessage.equals(foremanError.getText());
             case "Email": {
-                String expectedMessageErrorMessage = form.get("ErrorMessage");
-                return expectedMessageErrorMessage.equals(emailError.getText());
+                return expectedMessage.equals(emailError.getText());
             }
             case "Message": {
-                String expectedMessageErrorMessage = form.get("ErrorMessage");
-                return expectedMessageErrorMessage.equals(messageError.getText());
+                return expectedMessage.equals(messageError.getText());
             }
             case "Header":
-                String expectedHeaderErrorMessage = form.get("ErrorMessage");
-                return expectedHeaderErrorMessage.equals(headerError.getText());
+                return expectedMessage.equals(headerError.getText());
         }
         return false;
     }
