@@ -6,8 +6,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.Map;
+
+import static utilities.AllConstants.HEADER_MESSAGE;
 
 public class ContactAndShopPage {
     WebDriver driver;
@@ -89,11 +92,10 @@ public class ContactAndShopPage {
     }
     public Boolean errorMessageNotExsist() {
 
-        String headerMessage= "We welcome your feedback - tell it how it is.";
         String blueMessage= headerError.getAttribute("textContent").trim();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         try {
-            if (headerMessage.equals(blueMessage)) {
+            if (HEADER_MESSAGE.equals(blueMessage)) {
                 if ((wait.until(ExpectedConditions.invisibilityOf(foremanError))) &&
                         (wait.until(ExpectedConditions.invisibilityOf(messageError))) &&
                         (wait.until(ExpectedConditions.invisibilityOf(emailError)))) {
