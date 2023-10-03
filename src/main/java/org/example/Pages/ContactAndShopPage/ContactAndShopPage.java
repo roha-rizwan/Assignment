@@ -43,13 +43,14 @@ public class ContactAndShopPage {
     @FindBy(xpath = "//div[2]/div/a")
     WebElement okButton;
 
+    WebDriverWait wait;
+
     public ContactAndShopPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-
+        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
     }
     public void submitForm() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.elementToBeClickable(submitFormButton)).click();
          }
     public boolean verifyErrorMessage(Map<String, String> form) {
@@ -71,20 +72,17 @@ public class ContactAndShopPage {
     }
     public void enterForename(String data, String Field) {
         if (Field.equals("Forename")) {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
             wait.until(ExpectedConditions.visibilityOf(foremanField));
             foremanField.sendKeys(data);
         }
     }
     public void enterEmail(String data, String Field) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOf(emailField));
         if (Field.equals("Email")) {
             emailField.sendKeys(data);
         }
     }
     public void enterMessage(String data, String Field) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOf(messageField));
         if (Field.equals("Message")) {
             messageField.sendKeys(data);
@@ -109,16 +107,13 @@ public class ContactAndShopPage {
     }
 
     public void buyStuffedFrog() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.elementToBeClickable(stuffedFrogBuy)).click();
     }
 
     public void buyFluffyBunny() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.elementToBeClickable(flufflyBunny)).click();
     }
     public void buyValentineBear()  {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.elementToBeClickable(valentineBear)).click();
     }
 

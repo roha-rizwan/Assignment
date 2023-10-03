@@ -9,13 +9,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.example.Pages.ContactAndShopPage.ContactAndShopPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 import java.util.Map;
-public class ContactAndShop {
-    public WebDriver driver = new ChromeDriver();
+public class ContactAndShop extends BaseStep{
+
     ContactAndShopPage contactAndShopPage = new ContactAndShopPage(driver);
     @Given("^I am on the \"([^\"]*)\" page$")
     public void iAmOnThePage(String contactPage) {
