@@ -1,4 +1,4 @@
-package org.example.Pages.ContactAndShopPage;
+package org.example.Pages;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static utilities.AllConstants.HEADER_MESSAGE;
 
-public class ContactAndShopPage {
+public class ContactPage {
     WebDriver driver;
     @FindBy(xpath = "//a[contains(text(),'Submit')]")
     WebElement submitFormButton;
@@ -22,14 +22,6 @@ public class ContactAndShopPage {
     WebElement emailField;
     @FindBy(id = "message")
     WebElement messageField;
-    @FindBy(xpath = "//*[@id=\"product-2\"]/div/h4/following-sibling::p/a")
-    WebElement stuffedFrogBuy;
-    @FindBy(xpath = "//*[@id=\"product-4\"]/div/h4/following-sibling::p/a")
-    WebElement flufflyBunny;
-    @FindBy(xpath = "//*[@id=\"product-7\"]/div/h4/following-sibling::p/a")
-    WebElement valentineBear;
-    @FindBy(xpath = "//table/tfoot/tr[1]/td/strong")
-    WebElement actualTotal;
     @FindBy(id = "forename-err")
     WebElement foremanError;
     @FindBy(id = "email-err")
@@ -45,7 +37,7 @@ public class ContactAndShopPage {
 
     WebDriverWait wait;
 
-    public ContactAndShopPage(WebDriver driver) {
+    public ContactPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, Duration.ofSeconds(2));
@@ -88,7 +80,7 @@ public class ContactAndShopPage {
             messageField.sendKeys(data);
         }
     }
-    public Boolean errorMessageNotExsist() {
+    public Boolean errorMessageNotExist() {
 
         String blueMessage= headerError.getAttribute("textContent").trim();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -106,21 +98,6 @@ public class ContactAndShopPage {
          return false;
     }
 
-    public void buyStuffedFrog() {
-        wait.until(ExpectedConditions.elementToBeClickable(stuffedFrogBuy)).click();
-    }
-
-    public void buyFluffyBunny() {
-        wait.until(ExpectedConditions.elementToBeClickable(flufflyBunny)).click();
-    }
-    public void buyValentineBear()  {
-        wait.until(ExpectedConditions.elementToBeClickable(valentineBear)).click();
-    }
-
-    public boolean checkTotal(String total) {
-        String overAllTotal = actualTotal.getText();
-        return total.equals(overAllTotal);
-    }
     public boolean verifyMessage(String message)  {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(okButton));
